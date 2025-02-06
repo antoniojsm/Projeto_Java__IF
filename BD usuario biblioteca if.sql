@@ -10,3 +10,6 @@ id_livro INT PRIMARY KEY AUTO_INCREMENT,
 titulo_livro VARCHAR (45) NOT NULL,
 autor_livro VARCHAR (45) NOT NULL,
 disponibilidade BOOLEAN NOT NULL);
+
+
+
