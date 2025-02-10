@@ -13,30 +13,35 @@ import java.sql.SQLException;
  *
  * @author anton
  */
-public class ConexãoMySQL {
-    public static void main(String[] args) throws SQLException{
-      Connection conexao=null;
-            try {
-                // Registrar o driver JDBC
+    public class ConexãoMySQL {
+    // Configurações do banco de dados
+
+    private static final String URL = "jdbc:mysql://127.0.0.1:3306/bibliotecaif";
+    private static final String USUARIO = "root";
+    private static final String SENHA = "neto123.";
+
+    // Método para obter uma conexão com o banco de dados.
+    public static Connection getConnection() {
+        try {
+            // Carrega o driver JDBC
             Class.forName("com.mysql.cj.jdbc.Driver");
-           conexao = DriverManager.getConnection("jdbc:mysql://127.0.0.1/bibliotecaif", "root", "neto123");
-           ResultSet rsCliente=conexao.createStatement().executeQuery("SELECT * FROM livros");
-           while(rsCliente.next()){
-               System.out.println("id_livro:"+rsCliente.getString("id_livro"));
-           }
-            System.out.println("Conexão realizada com sucesso!");
-           } catch (ClassNotFoundException ex){
-            System.out.println("drive do banco não localzado");
-           } catch (SQLException ex){
-            System.out.println("Ocorreu um erro ao acessar o banco:" + ex.getMessage());
-        } finally{
-                if(conexao!=null){
-                    conexao.close();
-                }
-            }
+
+            // Retorna a conexão com o banco de dados
+            return DriverManager.getConnection(URL, USUARIO, SENHA);
+
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new RuntimeException("Erro ao obter a conexão com o banco de dados: " + e.getMessage(), e);
+        }
     }
 
-    public static Connection getConnection() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    // Método para fechar a conexão com o banco de dados.
+    public static void closeConnection(Connection connection) {
+        try {
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao fechar a conexão com o banco de dados: " + e.getMessage(), e);
+        }
     }
-}
+    }
