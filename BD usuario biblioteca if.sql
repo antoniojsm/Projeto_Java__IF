@@ -11,9 +11,6 @@ titulo_livro VARCHAR (45) NOT NULL,
 autor_livro VARCHAR (45) NOT NULL,
 disponibilidade BOOLEAN NOT NULL);
 
-INSERT INTO livros VALUES 
-(NULL, "testeteste", "antoniojose", 1);
-
 SELECT * FROM livros;
 
 
