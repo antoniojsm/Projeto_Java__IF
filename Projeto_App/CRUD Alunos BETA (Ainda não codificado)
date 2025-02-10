@@ -1,0 +1,127 @@
+
+(CREATE)
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class AlunoDAO {
+    public void adicionarAluno(String nome, String email, String telefone) {
+        String sql = "INSERT INTO alunos (nome, email, telefone) VALUES (?, ?, ?)";
+        try (Connection conn = ConexaoBD.getConexao();
+             PreparedStatement pst = conn.prepareStatement(sql)) {
+
+            pst.setString(1, nome);
+            pst.setString(2, email);
+            pst.setString(3, telefone);
+
+            pst.executeUpdate();
+            System.out.println("Aluno adicionado com sucesso!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+(READ)
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class AlunoDAO {
+    public void listarAlunos() {
+        String sql = "SELECT * FROM alunos";
+        try (Connection conn = ConexaoBD.getConexao();
+             PreparedStatement pst = conn.prepareStatement(sql);
+             ResultSet rs = pst.executeQuery()) {
+
+            while (rs.next()) {
+                int alunoId = rs.getInt("aluno_id");
+                String nome = rs.getString("nome");
+                String email = rs.getString("email");
+                String telefone = rs.getString("telefone");
+
+                System.out.println("ID: " + alunoId + ", Nome: " + nome + ", Email: " + email + ", Telefone: " + telefone);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+(UPDATE)
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class AlunoDAO {
+    public void atualizarAluno(int alunoId, String novoNome, String novoEmail, String novoTelefone) {
+        String sql = "UPDATE alunos SET nome = ?, email = ?, telefone = ? WHERE aluno_id = ?";
+        try (Connection conn = ConexaoBD.getConexao();
+             PreparedStatement pst = conn.prepareStatement(sql)) {
+
+            pst.setString(1, novoNome);
+            pst.setString(2, novoEmail);
+            pst.setString(3, novoTelefone);
+            pst.setInt(4, alunoId);
+
+            pst.executeUpdate();
+            System.out.println("Aluno atualizado com sucesso!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+(DELETE)
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class AlunoDAO {
+    public void excluirAluno(int alunoId) {
+        String sql = "DELETE FROM alunos WHERE aluno_id = ?";
+        try (Connection conn = ConexaoBD.getConexao();
+             PreparedStatement pst = conn.prepareStatement(sql)) {
+
+            pst.setInt(1, alunoId);
+
+            pst.executeUpdate();
+            System.out.println("Aluno excluído com sucesso!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+(MAIN para teste)
+
+public class Main {
+    public static void main(String[] args) {
+        AlunoDAO alunoDAO = new AlunoDAO();
+
+        // Adicionar um novo aluno
+        alunoDAO.adicionarAluno("João Silva", "joao.silva@gmail.com", "123456789");
+
+        // Listar todos os alunos
+        alunoDAO.listarAlunos();
+
+        // Atualizar um aluno (assumindo que o ID do aluno seja 1)
+        alunoDAO.atualizarAluno(1, "João da Silva", "joao.dasilva@gmail.com", "987654321");
+
+        // Excluir um aluno (assumindo que o ID do aluno seja 1)
+        alunoDAO.excluirAluno(1);
+    }
+}
+
+(OBSERVAÇÔES)
+
+Clique em Run no NetBeans para executar o projeto.
+O NetBeans vai compilar o código e executar o CRUD no banco de dados bibliotecaif.
+Certifique-se de que o banco de dados bibliotecaif esteja criado no MySQL.
+Verifique se o MySQL está rodando no seu computador.
+Você pode implementar CRUDs semelhantes para as tabelas livros, emprestimo e devolucao, seguindo o mesmo padrão de código.
