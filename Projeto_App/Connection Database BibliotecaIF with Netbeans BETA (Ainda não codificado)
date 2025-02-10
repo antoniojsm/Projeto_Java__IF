@@ -1,0 +1,18 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class ConexaoBD {
+    private static final String URL = "jdbc:mysql://localhost:3306/bibliotecaif"; // URL do banco
+    private static final String USER = "root"; // Usuário do banco (alterar conforme necessário)
+    private static final String PASSWORD = ""; // Senha do banco (alterar conforme necessário)
+
+    public static Connection getConexao() throws SQLException {
+        try {
+            // Conectar ao banco de dados
+            return DriverManager.getConnection(URL, USER, PASSWORD);
+        } catch (SQLException e) {
+            throw new SQLException("Erro de conexão com o banco de dados: " + e.getMessage());
+        }
+    }
+}
