@@ -13,9 +13,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-public class Tela_De_login extends TelaApp {
+public class Tela_De_login extends JFrame {
 
     // Método para conectar ao banco de dados
     private Connection connect() {
