@@ -11,6 +11,13 @@ import static javax.swing.SpringLayout.WIDTH;
  * @author anton
  */
 public class Logar {
+    
+    public void limparCampos(){
+    usernameField.setText(null);
+    passwordField.setText(null);
+    usernameField.resquestFocus();
+}
+    
     public void logar(){
         try{
             String user = usernameField.getText();
