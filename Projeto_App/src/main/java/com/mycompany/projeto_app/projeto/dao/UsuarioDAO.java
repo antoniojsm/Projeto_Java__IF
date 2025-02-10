@@ -35,18 +35,4 @@ public class UsuarioDAO {
             return null;
         }
     }
-
-    private static class usuarioDTO {
-
-        public usuarioDTO() {
-        }
-
-        private String getUser() {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        }
-
-        private String getPassword() {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        }
-    }
 }
