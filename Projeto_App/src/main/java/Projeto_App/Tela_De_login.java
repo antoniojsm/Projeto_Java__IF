@@ -4,7 +4,7 @@
  */
 package Projeto_App;
 
-import com.mycompany.projeto_app.projeto.gui.TelaApp;
+import com.mycompany.projeto_app.projeto.gui.TelaLogin;
 
 /**
  *
@@ -12,7 +12,7 @@ import com.mycompany.projeto_app.projeto.gui.TelaApp;
  */
 public class Tela_De_login{
     public static void main(String[] args) {
-        TelaApp objTL=new TelaApp();
+        TelaLogin objTL=new TelaLogin();
         objTL.setVisible(true);
    }
 }

@@ -11,15 +11,11 @@ package com.mycompany.projeto_app.projeto.dto;
 class UsuarioDTO {
     private int id;
     private String user,password;
-    
-    public UsuarioDTO(int id, String user, String password){
-        this.id=id;
-        this.user=user;
-        this.password=password;
-    }
 
-    UsuarioDTO(String WIDTH, String user, String password) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public UsuarioDTO(int id, String user, String password) {
+        this.id = id;
+        this.user = user;
+        this.password = password;
     }
 
     public int getId() {
@@ -45,5 +41,6 @@ class UsuarioDTO {
     public void setPassword(String password) {
         this.password = password;
     }
+    
     
 }

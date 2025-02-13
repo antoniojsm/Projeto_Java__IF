@@ -14,12 +14,12 @@ import java.sql.SQLException;
  *
  * @author anton
  */
-public class UsuarioDAO {
+public class UsuarioDAO{
     private Connection connection;
     public UsuarioDAO(){
         connection = ConexãoMySQL.getConnection();
         }
-    public ResultSet autenticacaoUsuario(usuarioDTO usuario) throws SQLException{
+    public ResultSet autenticacaoUsuario(UsuarioDTO usuario){
         try{
             String sql="SELECT * FROM usuario_bibblioteca WHERE user=? end password=?";
             PreparedStatement pst = connection.prepareStatement(sql);
