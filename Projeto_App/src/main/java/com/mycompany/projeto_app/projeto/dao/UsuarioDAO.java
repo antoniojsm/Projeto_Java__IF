@@ -16,7 +16,7 @@ import java.sql.SQLException;
  */
 public class UsuarioDAO{
     private Connection connection;
-    public UsuarioDAO(){
+    public void UsuarioDAO(){
         connection = ConexãoMySQL.getConnection();
         }
     public ResultSet autenticacaoUsuario(UsuarioDTO usuario){
