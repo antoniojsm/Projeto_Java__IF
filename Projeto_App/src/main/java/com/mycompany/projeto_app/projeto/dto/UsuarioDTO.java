@@ -8,7 +8,7 @@ package com.mycompany.projeto_app.projeto.dto;
  *
  * @author anton
  */
-class UsuarioDTO {
+public class UsuarioDTO {
     private int id;
     private String user,password;
 

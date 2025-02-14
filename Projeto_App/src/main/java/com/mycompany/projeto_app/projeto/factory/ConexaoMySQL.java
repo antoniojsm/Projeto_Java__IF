@@ -13,9 +13,9 @@ import java.sql.SQLException;
  *
  * @author anton
  */
-    public class ConexãoMySQL {
+    public class ConexaoMySQL {
     // Configurações do banco de dados
-
+        
     private static final String URL = "jdbc:mysql://127.0.0.1:3306/biblioteca";
     private static final String USUARIO = "root";
     private static final String SENHA = "neto123";
@@ -27,6 +27,7 @@ import java.sql.SQLException;
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             // Retorna a conexão com o banco de dados
+           
             return DriverManager.getConnection(URL, USUARIO, SENHA);
 
         } catch (ClassNotFoundException | SQLException e) {

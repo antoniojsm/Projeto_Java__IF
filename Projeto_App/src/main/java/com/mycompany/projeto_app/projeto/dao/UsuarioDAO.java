@@ -4,7 +4,8 @@
  */
 package com.mycompany.projeto_app.projeto.dao;
 
-import com.mycompany.projeto_app.projeto.factory.ConexãoMySQL;
+import com.mycompany.projeto_app.projeto.dto.UsuarioDTO;
+import com.mycompany.projeto_app.projeto.factory.ConexaoMySQL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,12 +17,13 @@ import java.sql.SQLException;
  */
 public class UsuarioDAO{
     private Connection connection;
-    public void UsuarioDAO(){
-        connection = ConexãoMySQL.getConnection();
+    public UsuarioDAO(){
+        System.out.println(connection+"");
+        connection = ConexaoMySQL.getConnection();
         }
     public ResultSet autenticacaoUsuario(UsuarioDTO usuario){
         try{
-            String sql="SELECT * FROM usuario_bibblioteca WHERE user=? end password=?";
+            String sql="SELECT * FROM usuario WHERE usuario=? AND senha=?";
             PreparedStatement pst = connection.prepareStatement(sql);
             pst.setString(1, usuario.getUser());
             pst.setString(2, usuario.getPassword());

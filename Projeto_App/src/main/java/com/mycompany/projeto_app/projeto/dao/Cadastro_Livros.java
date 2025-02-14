@@ -4,7 +4,7 @@
  */
 package com.mycompany.projeto_app.projeto.dao;
 
-import com.mycompany.projeto_app.projeto.factory.ConexãoMySQL;
+import com.mycompany.projeto_app.projeto.factory.ConexaoMySQL;
 import java.sql.Connection;
 
 /**
@@ -15,7 +15,7 @@ public class Cadastro_Livros {
     private Connection connection;
     
     public Cadastro_Livros (){
-        connection = ConexãoMySQL.getConnection(); 
+        connection = ConexaoMySQL.getConnection(); 
     }
     
 }

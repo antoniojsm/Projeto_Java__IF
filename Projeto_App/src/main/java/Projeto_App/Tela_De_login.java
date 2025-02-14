@@ -4,6 +4,7 @@
  */
 package Projeto_App;
 
+import com.mycompany.projeto_app.projeto.factory.ConexaoMySQL;
 import com.mycompany.projeto_app.projeto.gui.TelaLogin;
 
 /**
@@ -14,5 +15,7 @@ public class Tela_De_login{
     public static void main(String[] args) {
         TelaLogin objTL=new TelaLogin();
         objTL.setVisible(true);
+                ConexaoMySQL.getConnection();
+
    }
 }
