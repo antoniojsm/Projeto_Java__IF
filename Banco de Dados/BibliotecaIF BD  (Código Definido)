@@ -1,0 +1,33 @@
+
+CREATE DATABASE BibliotecaIF;
+USE DATABASE BibliotecaIF;
+
+CREATE TABLE Aluno (
+    id_aluno INT PRIMARY KEY,
+    nome_aluno VARCHAR(100) NOT NULL,
+    email_aluno VARCHAR(100)
+);
+
+CREATE TABLE Livros (
+    id_livro INT PRIMARY KEY,
+    titulo_livro VARCHAR(200) NOT NULL,
+    autor_livro VARCHAR(100),
+    disponibilidade BOOLEAN NOT NULL
+);
+
+CREATE TABLE Emprestimo (
+    id_emprestimo INT PRIMARY KEY,
+    data_emprestimo DATE NOT NULL,
+    data_devolucao_prevista DATE NOT NULL,
+    id_aluno INT,
+    id_livro INT,
+    FOREIGN KEY (id_aluno) REFERENCES Aluno(id_aluno),
+    FOREIGN KEY (id_livro) REFERENCES Livros(id_livro)
+);
+
+CREATE TABLE Devolucao (
+    id INT PRIMARY KEY,
+    data_devolucao DATE NOT NULL,
+    id_emprestimo INT,
+    FOREIGN KEY (id_emprestimo) REFERENCES Emprestimo(id_emprestimo)
+);
