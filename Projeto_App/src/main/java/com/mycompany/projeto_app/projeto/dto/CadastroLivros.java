@@ -53,4 +53,8 @@ public class CadastroLivros{
     public int getDisponibilidade() {
         return disponibilidade;
     }
+
+    public void add(CadastroLivros Livros) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
