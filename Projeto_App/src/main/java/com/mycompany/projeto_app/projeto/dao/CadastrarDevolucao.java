@@ -6,8 +6,8 @@ package com.mycompany.projeto_app.projeto.dao;
 
 /**
  *
- * @author anton
+ * @author matia
  */
-public class DeletarLivro {
+public class CadastrarDevolucao {
     
 }
