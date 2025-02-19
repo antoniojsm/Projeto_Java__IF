@@ -31,10 +31,10 @@ public class CadastroLivros {
         try {
             String query = "INSERT INTO cadastrolivros (id_livro, titulo_livro, autor_livro, disponibilidade) VALUES (?, ?, ?, ?)";
             try (PreparedStatement pst = connection.prepareStatement(query)) {
-                pst.setInt(1, Livros.getId_livro());
-                pst.setString(2, Livros.getTitulo_livro());
-                pst.setString(3, Livros.getAutor_livro());
-                pst.setInt(4, Livros.getDisponibilidade());
+                pst.setInt(1, (int) Livros.getId_livro());
+                pst.setString(2, (String) Livros.getTitulo_livro());
+                pst.setString(3, (String) Livros.getAutor_livro());
+                pst.setInt(4, (int) Livros.getDisponibilidade());
                 pst.executeUpdate();
                 pst.close();
             }
@@ -69,10 +69,10 @@ public class CadastroLivros {
         try {
             String query = "UPDATE cadastrolivros SET titulo_livro = ?, autor_livro = ?, disponibilidade = ? WHERE id_livro  = ?";
             try (PreparedStatement ps = connection.prepareStatement(query)) {
-                ps.setString(1, Livros.getTitulo_livro());
-                ps.setString(2, Livros.getAutor_livro());
-                ps.setInt(3, Livros.getDisponibilidade());
-                ps.setInt(4, Livros.getId_livro());
+                ps.setString(1, (String) Livros.getTitulo_livro());
+                ps.setString(2, (String) Livros.getAutor_livro());
+                ps.setInt(3, (int) Livros.getDisponibilidade());
+                ps.setInt(4, (int) Livros.getId_livro());
 
                 ps.executeUpdate();
                 ps.close();

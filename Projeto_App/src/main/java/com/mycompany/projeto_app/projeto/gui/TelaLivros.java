@@ -364,7 +364,7 @@ public class TelaLivros extends javax.swing.JFrame {
                 // Inserir dados no banco através do método da Classe ProdutoDAO (adicionarProduto).  produtoDao.atualizarProduto(produtoAtualizado); 
                 JOptionPane.showMessageDialog(null, "Produto atualizado com sucesso.");
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Formato de preço inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,"", "Erro", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Selecione um  para atualizar.", "Aviso", JOptionPane.WARNING_MESSAGE);
