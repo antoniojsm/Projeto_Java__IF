@@ -4,7 +4,6 @@
  */
 package com.mycompany.projeto_app.projeto.dao;
 
-import com.mycompany.projeto_app.projeto.dto.CadastroLivros;
 import com.mycompany.projeto_app.projeto.factory.ConexaoMySQL;
 import java.awt.List;
 import java.sql.Connection;
@@ -18,7 +17,7 @@ import java.util.ArrayList;
  *
  * @author anton
  */
-public class CadastrarLivro {
+public class CadastroLivros {
     private Connection connection;
     
     public CadastrarLivro(){
@@ -60,7 +59,6 @@ public class CadastrarLivro {
             System.err.println("Erro ao realizar operação: " + e.getMessage());
         }
         return Livros;
-    }
 }
 
-
+}

@@ -22,6 +22,10 @@ public class CadastroLivros{
         
     }
 
+    public CadastroLivros(String titulo_livro, String autor_livro, int disponibilidade) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public void setId_livro(int id_livro) {
         this.id_livro = id_livro;
     }
