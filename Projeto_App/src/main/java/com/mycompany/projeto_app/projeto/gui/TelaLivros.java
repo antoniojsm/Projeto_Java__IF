@@ -4,6 +4,11 @@
  */
 package com.mycompany.projeto_app.projeto.gui;
 
+import com.mycompany.projeto_app.projeto.dao.CadastroLivros;
+import java.awt.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author anton
@@ -293,35 +298,91 @@ public class TelaLivros extends javax.swing.JFrame {
     private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
 
-    private void alterarLivros() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
     private void inserirLivro() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // Dados inseridos pelo usuário no formulário. 
+        String titulo_livro = txtNome.getText();
+        try {
+            // Convertendo os dados inseridos no formulário. 
+            String autor_livro;
+            autor_livro = txtAutor.getText();
+            int disponibilidade = Integer.parseInt(txtDisp.getText());
+            // Cria um novo objeto da classe ProdutoDTO 
+            CadastroLivros novolivro = new CadastroLivros(titulo_livro, autor_livro, disponibilidade);
+            // Inserir dados no banco através do método da Classe ProdutoDAO (adicionarProduto).  produtoDao.adicionarProduto(novoProduto); 
+            JOptionPane.showMessageDialog(null, "Livro adicionado com sucesso.");
+            limparCampos();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Formato de preço inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }
+// Função para limpar os campos JTextField 
+
+    public void limparCampos() {
+        txtNome.setText(null);
+        txtAutor.setText(null);
+        txtDisp.setText(null);
+        txtNome.requestFocus();
+    }
+    // Método para listar os produtos. 
 
     private void listarLivros() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private void limparLivros() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private void limparCampos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private void excluirLivros() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private void LimparCampos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            List<CadastroLivros> Livros = CadastroLivros.listarLivros();
+            DefaultTableModel model = (DefaultTableModel) tbDados.getModel();
+            model.setNumRows(0); // Utilizando um JTable para listar os dados. 
+            // Inserir os dados na Jtable  
+// Nome da Jtable que estou usando é tbDados. 
+            for (CadastroLivros Livros : Livros) {
+                Object[] rowData = {
+                    Livros.getId_livro(), Livros.getTitulo_livro(), Livros.getAutor_livro(), Livros.getDisponibilidade()};
+                model.addRow(rowData);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao carregar os dados" + e.getMessage());
+        }
     }
 
     private void carregarCampos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int setar = tbDados.getSelectedRow();
+        txtNome.setText(tbDados.getModel().getValueAt(setar, 1).toString());
+        txtAutor.setText(tbDados.getModel().getValueAt(setar, 2).toString());
+        txtDisp.setText(tbDados.getModel().getValueAt(setar, 3).toString());
     }
+//Obter os dados atualizados e atualizar o banco de dados. 
+
+    private void alterarLivros() {
+        int selectedRow = tbDados.getSelectedRow();
+        if (selectedRow != -1) {
+            int id_livro = (int) tbDados.getValueAt(selectedRow, 0);
+            String titulo_livro = txtNome.getText();
+            try {
+                // Recebendo e convertendo os dados inseridos no formulário. 
+                String autor_livro = txtDisp.getText();
+                int disponibilidade = Integer.parseInt(txtDisp.getText());
+                // Cria um novo objeto da classe ProdutoDTO 
+                CadastroLivros LivroAtualizado = new CadastroLivros(titulo_livro, autor_livro, id_livro);
+                // Inserir dados no banco através do método da Classe ProdutoDAO (adicionarProduto).  produtoDao.atualizarProduto(produtoAtualizado); 
+                JOptionPane.showMessageDialog(null, "Produto atualizado com sucesso.");
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Formato de preço inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um  para atualizar.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    private void excluirLivros() {
+        int selectedRow = tbDados.getSelectedRow();
+        if (selectedRow != -1) {
+            int id_livro = (int) tbDados.getValueAt(selectedRow, 0);
+            int confirmacao = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir este  livro?", "Confirmação", JOptionPane.YES_NO_OPTION);
+            if (confirmacao == JOptionPane.YES_OPTION) {
+                CadastroLivros.excluirLivros(id_livro);
+                //atualizarTabela(); 
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um livro para excluir.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
 }

@@ -18,9 +18,13 @@ import java.util.ArrayList;
  * @author anton
  */
 public class CadastroLivros {
+
+    public static void excluirLivros(int id_livro) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     private Connection connection;
     
-    public CadastrarLivro(){
+    public CadastroLivros(String titulo_livro, String autor_livro, int Disponibilidade){
         connection= ConexaoMySQL.getConnection();
     }
     public void cadastrarlivro(CadastroLivros Livros) {
@@ -50,7 +54,7 @@ public class CadastroLivros {
                         String nome = rs.getString("titulo_livro");
                         String autor = rs.getString("autor_livro");
                         int disponibilidade = rs.getInt("disponibilidade");
-                        CadastroLivros Livro = new CadastroLivros (id, nome, autor, disponibilidade);
+                        CadastroLivros Livro = new CadastroLivros(nome, autor, id);
                         Livros.add(Livro);
                     }
                 }
@@ -60,5 +64,53 @@ public class CadastroLivros {
         }
         return Livros;
 }
+    
+    public void atualizarProduto(CadastroLivros Livros) {
+        try {
+            String query = "UPDATE cadastrolivros SET titulo_livro = ?, autor_livro = ?, disponibilidade = ? WHERE id_livro  = ?";
+            try (PreparedStatement ps = connection.prepareStatement(query)) {
+                ps.setString(1, Livros.getTitulo_livro());
+                ps.setString(2, Livros.getAutor_livro());
+                ps.setInt(3, Livros.getDisponibilidade());
+                ps.setInt(4, Livros.getId_livro());
+
+                ps.executeUpdate();
+                ps.close();
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro ao realizar operação: " + e.getMessage());
+        }
+    }
+
+    public void excluirLivro(int id_livro) {
+        try {
+            String query = "DELETE FROM cadstrolivros WHERE id_livro = ?";
+            try (PreparedStatement pst = connection.prepareStatement(query)) {
+                pst.setInt(1, id_livro);
+                pst.executeUpdate();
+                pst.close();
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro ao realizar operação: " + e.getMessage());
+        }
+    }
+
+    public Object getId_livro() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public Object getTitulo_livro() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public Object getAutor_livro() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public Object getDisponibilidade() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+}
+
 
 }
