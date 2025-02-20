@@ -4,7 +4,7 @@
  */
 package com.mycompany.projeto_app.projeto.gui;
 
-import com.mycompany.projeto_app.projeto.dao.CadastroLivro;
+import com.mycompany.projeto_app.projeto.dao.CadastroLivroDAO;
 import com.mycompany.projeto_app.projeto.dto.CadastroLivrosDTO;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -239,7 +239,7 @@ public class TelaLivros extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
     excluirLivros();
     listarLivros();
-    LimparCampos();
+    limparCampos();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -300,19 +300,29 @@ public class TelaLivros extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void inserirLivro() {
-        // Dados inseridos pelo usuário no formulário. 
         String titulo_livro = txtNome.getText();
         String autor_livro = txtAutor.getText();
-        int disponibilidade = Integer.parseInt(txtDisp.getText());
+        String disponibilidadeText = txtDisp.getText();
+
+        // Validação dos campos
+        if (titulo_livro.isEmpty() || autor_livro.isEmpty() || disponibilidadeText.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
         try {
-            // Cria um novo objeto da classe ProdutoDTO 
-            CadastroLivro novolivro = new CadastroLivro(titulo_livro, autor_livro, disponibilidade);
-            // Inserir dados no banco através do método da Classe ProdutoDAO (adicionarProduto).  produtoDao.adicionarProduto(novoProduto); 
-            CadastroLivro.cadastralivro(novolivro);
+            int disponibilidade = Integer.parseInt(disponibilidadeText);
+            int idkkk = (int) (Math.random()*4);
+            CadastroLivrosDTO novolivroDTO = new CadastroLivrosDTO(idkkk, titulo_livro, autor_livro, disponibilidade);
+            CadastroLivroDAO novoLivro = new CadastroLivroDAO();
+            // Chamada correta do método de cadastro;
+            // Chamada correta do método de cadastro
+            novoLivro.cadastrarlivro(novolivroDTO); // Supondo que seja um método estático
             JOptionPane.showMessageDialog(null, "Livro adicionado com sucesso.");
             limparCampos();
+            listarLivros(); // Atualiza a tabela após a inserção
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "", "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Erro ao inserir o livro: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 // Função para limpar os campos JTextField 
@@ -326,8 +336,9 @@ public class TelaLivros extends javax.swing.JFrame {
     // Método para listar os produtos. 
 
     private void listarLivros() {
+        CadastroLivroDAO livroDao = new CadastroLivroDAO();
         try {
-            List<CadastroLivrosDTO> livros = CadastroLivro.listarLivro();
+            List<CadastroLivrosDTO> livros = livroDao.listarLivros();
             DefaultTableModel model = (DefaultTableModel) tbDados.getModel();
             model.setNumRows(0); // Utilizando um JTable para listar os dados. 
             // Inserir os dados na Jtable  
@@ -355,14 +366,13 @@ public class TelaLivros extends javax.swing.JFrame {
         if (selectedRow != -1) {
             int id_livro = (int) tbDados.getValueAt(selectedRow, 0);
             String titulo_livro = txtNome.getText();
+            String autor_livro = txtAutor.getText();
             try {
-                // Recebendo e convertendo os dados inseridos no formulário. 
-                String autor_livro = txtDisp.getText();
-                int disponibilidade = Integer.parseInt(txtDisp.getText());
                 // Cria um novo objeto da classe ProdutoDTO 
-                CadastroLivro LivroAtualizado = new CadastroLivro(titulo_livro, autor_livro, id_livro);
+                CadastroLivrosDTO LivroAtualizado = new CadastroLivrosDTO(id_livro, titulo_livro, autor_livro, 34);
                 // Inserir dados no banco através do método da Classe ProdutoDAO (adicionarProduto).  produtoDao.atualizarProduto(produtoAtualizado); 
-                CadastroLivro.atualizarLivro(LivroAtualizado);
+                CadastroLivroDAO livroDao = new CadastroLivroDAO();
+                livroDao.atualizarLivro(LivroAtualizado);
                 JOptionPane.showMessageDialog(null, "Produto atualizado com sucesso.");
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null,"", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -378,16 +388,12 @@ public class TelaLivros extends javax.swing.JFrame {
             int id_livro = (int) tbDados.getValueAt(selectedRow, 0);
             int confirmacao = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir este  livro?", "Confirmação", JOptionPane.YES_NO_OPTION);
             if (confirmacao == JOptionPane.YES_OPTION) {
-                CadastroLivro.excluirLivro(id_livro);
+                CadastroLivroDAO livroDao = new CadastroLivroDAO();
+                livroDao.excluirLivro(id_livro);
                 //atualizarTabela(); 
             }
         } else {
             JOptionPane.showMessageDialog(null, "Selecione um livro para excluir.", "Aviso", JOptionPane.WARNING_MESSAGE);
         }
     }
-
-    private void LimparCampos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
-}
