@@ -4,8 +4,9 @@
  */
 package com.mycompany.projeto_app.projeto.dao;
 
+import com.mycompany.projeto_app.projeto.dto.CadastroLivrosDTO;
 import com.mycompany.projeto_app.projeto.factory.ConexaoMySQL;
-import java.awt.List;
+import java.util.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,24 +18,19 @@ import java.util.ArrayList;
  *
  * @author anton
  */
-public class CadastroLivros {
-
-    public static void excluirLivros(int id_livro) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+public class CadastroLivro {
     private Connection connection;
     
-    public CadastroLivros(String titulo_livro, String autor_livro, int Disponibilidade){
+    public CadastroLivro(String titulo_livro, String autor_livro, int Disponibilidade){
         connection= ConexaoMySQL.getConnection();
     }
-    public void cadastrarlivro(CadastroLivros Livros) {
+    public void cadastrarlivro(CadastroLivro Livros) {
         try {
             String query = "INSERT INTO cadastrolivros (id_livro, titulo_livro, autor_livro, disponibilidade) VALUES (?, ?, ?, ?)";
             try (PreparedStatement pst = connection.prepareStatement(query)) {
-                pst.setInt(1, (int) Livros.getId_livro());
-                pst.setString(2, (String) Livros.getTitulo_livro());
-                pst.setString(3, (String) Livros.getAutor_livro());
-                pst.setInt(4, (int) Livros.getDisponibilidade());
+                pst.setString(1, (String) Livros.getTitulo_livro());
+                pst.setString(2, (String) Livros.getAutor_livro());
+                pst.setInt(3, Livros.getDisponibilidade());
                 pst.executeUpdate();
                 pst.close();
             }
@@ -43,8 +39,8 @@ public class CadastroLivros {
         }
     }
 
-    public List <CadastroLivros> listarLivros() {
-        List <CadastroLivros> Livros = new ArrayList();
+    public List <CadastroLivro> listarLivros() {
+        List <CadastroLivro> Livros = new ArrayList();
         try {
             String query = "SELECT * FROM cadastrolivros";
             try (Statement st = connection.createStatement()) {
@@ -54,7 +50,7 @@ public class CadastroLivros {
                         String nome = rs.getString("titulo_livro");
                         String autor = rs.getString("autor_livro");
                         int disponibilidade = rs.getInt("disponibilidade");
-                        CadastroLivros Livro = new CadastroLivros(nome, autor, id);
+                        CadastroLivro Livro = new CadastroLivro(nome, autor, id);
                         Livros.add(Livro);
                     }
                 }
@@ -65,14 +61,13 @@ public class CadastroLivros {
         return Livros;
 }
     
-    public void atualizarProduto(CadastroLivros Livros) {
+    public void atualizarLivro(CadastroLivro Livros) {
         try {
             String query = "UPDATE cadastrolivros SET titulo_livro = ?, autor_livro = ?, disponibilidade = ? WHERE id_livro  = ?";
             try (PreparedStatement ps = connection.prepareStatement(query)) {
-                ps.setString(1, (String) Livros.getTitulo_livro());
-                ps.setString(2, (String) Livros.getAutor_livro());
-                ps.setInt(3, (int) Livros.getDisponibilidade());
-                ps.setInt(4, (int) Livros.getId_livro());
+                ps.setString(1,Livros.getTitulo_livro());
+                ps.setString(2, Livros.getAutor_livro());
+                ps.setInt(3, Livros.getDisponibilidade());
 
                 ps.executeUpdate();
                 ps.close();
@@ -94,23 +89,4 @@ public class CadastroLivros {
             System.err.println("Erro ao realizar operação: " + e.getMessage());
         }
     }
-
-    public Object getId_livro() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public Object getTitulo_livro() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public Object getAutor_livro() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public Object getDisponibilidade() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-}
-
-
 }

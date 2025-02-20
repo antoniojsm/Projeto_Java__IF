@@ -8,13 +8,13 @@ package com.mycompany.projeto_app.projeto.dto;
  *
  * @author anton
  */
-public class CadastroLivros{
+public class CadastroLivrosDTO{
     private int id_livro;
     private String titulo_livro;
     private String autor_livro;
     private int disponibilidade;
 
-    public CadastroLivros(int id_livro, String titulo_livro, String autor_livro, int disponibilidade) {
+    public CadastroLivrosDTO(int id_livro, String titulo_livro, String autor_livro, int disponibilidade) {
         this.id_livro = id_livro;
         this.titulo_livro = titulo_livro;
         this.autor_livro = autor_livro;

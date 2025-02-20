@@ -18,7 +18,7 @@ import java.sql.SQLException;
         
     private static final String URL = "jdbc:mysql://127.0.0.1:3306/biblioteca";
     private static final String USUARIO = "root";
-    private static final String SENHA = "magalhaes2008$";
+    private static final String SENHA = "neto123";
 
     // Método para obter uma conexão com o banco de dados.
     public static Connection getConnection() {
