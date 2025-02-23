@@ -33,8 +33,8 @@ public class UsuarioDAO{
             
             
         }catch (SQLException e){
-            System.out.println("erro ao realizar a operação"+e.getMessage());
-            return null;
+            System.err.println("Erro ao realizar operação: " + e.getMessage()); 
+            return null; 
         }
     }
 }
