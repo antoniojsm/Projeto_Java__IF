@@ -13,4 +13,4 @@ autor_livro VARCHAR (45) NOT NULL,
 disponibilidade INT NOT NULL);
 
 INSERT INTO usuario VALUES 
-(NULL, 'Antonio Jose', 12345)
+(NULL, 'admin', 12345)
