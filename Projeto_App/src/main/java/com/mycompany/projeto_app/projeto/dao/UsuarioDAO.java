@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -29,8 +30,8 @@ public class UsuarioDAO{
             pst.setString(2, usuario.getPassword());
             
             ResultSet rs = pst.executeQuery();
-            return rs;
             
+            return rs;
             
         }catch (SQLException e){
             System.err.println("Erro ao realizar operação: " + e.getMessage()); 

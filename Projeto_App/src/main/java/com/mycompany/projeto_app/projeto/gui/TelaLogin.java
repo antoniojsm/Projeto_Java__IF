@@ -267,7 +267,7 @@ public class TelaLogin extends javax.swing.JFrame {
         txtUsuario.requestFocus();
     }
 
-    public void logar() {
+ public void logar() {
         //String sql = "select * from usuarios where email=? and senha=?";
         try {
             String user = txtUsuario.getText();
@@ -282,12 +282,10 @@ public class TelaLogin extends javax.swing.JFrame {
                 InicialTela.setVisible(true);
                 dispose(); // Fecha a tela anterior
             } else {
-                
+                JOptionPane.showMessageDialog(null, "Dados Inválidos informe dados validos ");
+                limparCampos();
             }
         } catch (SQLException e) {
-            System.out.println(e+"oi");
-            JOptionPane.showMessageDialog(null, "Dados Inválidos");
-                limparCampos();
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }

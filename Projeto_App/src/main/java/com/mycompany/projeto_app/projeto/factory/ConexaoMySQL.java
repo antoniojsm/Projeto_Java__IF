@@ -44,4 +44,8 @@ import java.sql.SQLException;
             throw new RuntimeException("Erro ao fechar a conexão com o banco de dados: " + e.getMessage(), e);
         }
     }
+
+    Object getConexao() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     }

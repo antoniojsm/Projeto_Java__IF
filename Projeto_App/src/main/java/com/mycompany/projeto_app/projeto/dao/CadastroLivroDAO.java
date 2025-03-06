@@ -93,4 +93,8 @@ public class CadastroLivroDAO {
             System.err.println("Erro ao excluir livro: " + e.getMessage());
         }
     }
+
+    public void excluirAluno(int cpf) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

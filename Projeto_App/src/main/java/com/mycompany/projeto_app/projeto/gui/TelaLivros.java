@@ -370,11 +370,11 @@ public class TelaLivros extends javax.swing.JFrame {
             String autor_livro = txtAutor.getText();
             try {
                 // Cria um novo objeto da classe ProdutoDTO 
-                CadastroLivrosDTO LivroAtualizado = new CadastroLivrosDTO(id_livro, titulo_livro, autor_livro, 1);
+                CadastroLivrosDTO LivroAtualizado = new CadastroLivrosDTO(id_livro, titulo_livro, autor_livro, 12);
                 // Inserir dados no banco através do método da Classe ProdutoDAO (adicionarProduto).  produtoDao.atualizarProduto(produtoAtualizado); 
                 CadastroLivroDAO livroDao = new CadastroLivroDAO();
                 livroDao.atualizarLivro(LivroAtualizado);
-                JOptionPane.showMessageDialog(null, "Produto atualizado com sucesso.");
+                JOptionPane.showMessageDialog(null, "Livro atualizado com sucesso.");
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null,"", "Erro", JOptionPane.ERROR_MESSAGE);
             }
