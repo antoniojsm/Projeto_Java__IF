@@ -10,8 +10,8 @@ package com.mycompany.projeto_app.projeto.dto;
  */
 public class CadastroAlunoDTO {
     private int id_aluno;
-    private String cpf;
     private String nome_aluno;
+    private String cpf;
     private String email_aluno;
     private String emprestimo;
     private String entrega;
@@ -23,10 +23,6 @@ public class CadastroAlunoDTO {
         this.email_aluno = email_aluno;
         this.emprestimo = emprestimo;
         this.entrega = entrega;
-    }
-
-    public CadastroAlunoDTO(int id, String nome_aluno, int cpf, String email_aluno, String emprestimo, String entrega) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     public int getId_aluno() {
@@ -75,8 +71,6 @@ public class CadastroAlunoDTO {
 
     public void setEntrega(String entrega) {
         this.entrega = entrega;
-    }
-
-   
+    } 
     
 }

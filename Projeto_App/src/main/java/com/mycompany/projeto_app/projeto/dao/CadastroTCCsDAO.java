@@ -27,8 +27,8 @@ public class CadastroTCCsDAO {
 
     public void cadastrarTCCs (CadastroTCCsDTO TCCs) {
        connection= ConexaoMySQL.getConnection();
-       try {
-            String query = "INSERT INTO cadastroTCCs (titulo_tcc, autor_tcc, orientador_tcc, ano_de_defesa, resumo) VALUES (?, ?, ?, ?, ?,?)";
+       try { 
+            String query = "INSERT INTO cadastroTCCs (titulo_tcc, autor_tcc, orientador_tcc, ano_de_defesa, resumo) VALUES (?, ?, ?, ?, ?)";
             try (PreparedStatement pst = connection.prepareStatement(query)) {
                 pst.setString(1, TCCs.getTitulo_tcc());
                 pst.setString(2, TCCs.getAutor_tcc());
@@ -54,6 +54,7 @@ public class CadastroTCCsDAO {
                     String orientador= rs.getString("orientador_tcc");
                     int ano_de_defesa= rs.getInt("ano_de_defesa");
                     String resumo= rs.getString("resumo");
+
                     CadastroTCCsDTO tcc = new CadastroTCCsDTO(id, titulo, autor, orientador, ano_de_defesa, resumo);
                     TCCs.add(tcc); 
 
@@ -64,6 +65,7 @@ public class CadastroTCCsDAO {
         }
         return TCCs;
     }
+
 
     // Método para atualizar um TCC
     public void atualizarTCCs(CadastroTCCsDTO TCCs) {
@@ -78,6 +80,7 @@ public class CadastroTCCsDAO {
                 ps.setInt(6, TCCs.getId_TCC());
                 ps.executeUpdate();
             }
+            
         } catch (SQLException e) {
             System.err.println("Erro ao atualizar tcc: " + e.getMessage());
         }

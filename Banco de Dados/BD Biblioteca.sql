@@ -23,5 +23,3 @@ entrega VARCHAR (15) NOT NULL);
 
 INSERT INTO usuario VALUES 
 (NULL, 'admin', 12345)
-
-SELECT * FROM cadastrolivros ORDER BY titulo_livro ASC
