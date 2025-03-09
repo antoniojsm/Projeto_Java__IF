@@ -16,7 +16,7 @@ public class CadastroAlunoDTO {
     private String emprestimo;
     private String entrega;
 
-    public CadastroAlunoDTO(int id_aluno, String nome_aluno, String cpf, String email_aluno, String emprestimo, String entrega) {
+    public CadastroAlunoDTO(String nome_aluno, String cpf, String email_aluno, String emprestimo, String entrega, int id_aluno) {
         this.id_aluno = id_aluno;
         this.cpf = cpf;
         this.nome_aluno = nome_aluno;
