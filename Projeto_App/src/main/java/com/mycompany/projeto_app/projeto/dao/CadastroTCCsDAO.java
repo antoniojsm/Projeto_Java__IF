@@ -28,7 +28,7 @@ public class CadastroTCCsDAO {
     public void cadastrarTCCs (CadastroTCCsDTO TCCs) {
        connection= ConexaoMySQL.getConnection();
        try {
-            String query = "INSERT INTO cadastroTCCs (titulo_tcc, autor_tcc, orientador_tcc, ano_de_defesa, resumo) VALUES (?, ?, ?)";
+            String query = "INSERT INTO cadastroTCCs (titulo_tcc, autor_tcc, orientador_tcc, ano_de_defesa, resumo) VALUES (?, ?, ?, ?, ?)";
             try (PreparedStatement pst = connection.prepareStatement(query)) {
                 pst.setString(1, TCCs.getTitulo_tcc());
                 pst.setString(2, TCCs.getAutor_tcc());
@@ -54,8 +54,8 @@ public class CadastroTCCsDAO {
                     String orientador= rs.getString("orientador_tcc");
                     int ano_de_defesa= rs.getInt("ano_de_defesa");
                     String resumo= rs.getString("resumo");
-                    CadastroTCCsDTO TCCs = new CadastroTCCsDTO(id, titulo, autor, orientador,ano_de_defesa, resumo);
-                    TCCs.add(TCCs);
+                    CadastroTCCsDTO tccs = new CadastroTCCsDTO(id, titulo, autor, orientador,ano_de_defesa, resumo);
+                    TCCs.add(tccs);
                 }
             }
         } catch (SQLException e) {
@@ -65,16 +65,16 @@ public class CadastroTCCsDAO {
     }
 
     // Método para atualizar um livro
-    public void atualizarTCCs(CadastroTCCsDTO lTCCs) {
+    public void atualizarTCCs(CadastroTCCsDTO TCCs) {
         try {
             String query = "UPDATE cadastroTCCs SET titulo_tcc = ?, autor_tcc = ?, orientador_tcc = ?, ano_de_defesa = ?, resumo = ? WHERE id_TCC = ?";
-            try (PreparedStatement ps = connection.prepareStatement(query)) {
+            try (PreparedStatement pst = connection.prepareStatement(query)) {
                 pst.setString(1, TCCs.getTitulo_tcc());
                 pst.setString(2, TCCs.getAutor_tcc());
                 pst.setString(3, TCCs.getOrientador_tcc());
-                pst.setInt(4, TCCs.getAnoDeDefesa_tcc());
+                pst.setInt(4, TCCs.getAno_de_defesa());
                 pst.setString(5, TCCs.getResumo());
-                ps.executeUpdate();
+                pst.executeUpdate();
             }
         } catch (SQLException e) {
             System.err.println("Erro ao atualizar tcc: " + e.getMessage());

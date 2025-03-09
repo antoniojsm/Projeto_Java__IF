@@ -15,7 +15,6 @@ public class CadastroAlunoDTO {
     private String email_aluno;
     private String emprestimo;
     private String entrega;
-    private CadastroLivrosDTO livro;
 
     public CadastroAlunoDTO(int id_aluno, String nome_aluno, String cpf, String email_aluno, String emprestimo, String entrega) {
         this.id_aluno = id_aluno;
@@ -50,10 +49,6 @@ public class CadastroAlunoDTO {
         return entrega;
     }
 
-    public CadastroLivrosDTO getLivro() {
-        return livro;
-    }
-
     public void setId_aluno(int id_aluno) {
         this.id_aluno = id_aluno;
     }
@@ -76,12 +71,6 @@ public class CadastroAlunoDTO {
 
     public void setEntrega(String entrega) {
         this.entrega = entrega;
-    }
-
-    public void setLivro(CadastroLivrosDTO livro) {
-        this.livro = livro;
-    }
-
-    
+    } 
     
 }
