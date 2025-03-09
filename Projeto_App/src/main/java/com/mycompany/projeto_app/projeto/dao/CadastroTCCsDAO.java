@@ -27,13 +27,8 @@ public class CadastroTCCsDAO {
 
     public void cadastrarTCCs (CadastroTCCsDTO TCCs) {
        connection= ConexaoMySQL.getConnection();
-<<<<<<< Updated upstream
-       try { 
-            String query = "INSERT INTO cadastroTCCs (titulo_tcc, autor_tcc, orientador_tcc, ano_de_defesa, resumo) VALUES (?, ?, ?, ?, ?)";
-=======
        try {
             String query = "INSERT INTO cadastrotccs (titulo_tcc, autor_tcc, orientador_tcc, ano_de_defesa, resumo) VALUES (?, ?, ?, ?, ?)";
->>>>>>> Stashed changes
             try (PreparedStatement pst = connection.prepareStatement(query)) {
                 pst.setString(1, TCCs.getTitulo_tcc());
                 pst.setString(2, TCCs.getAutor_tcc());
@@ -59,15 +54,10 @@ public class CadastroTCCsDAO {
                     String orientador = rs.getString("orientador_tcc");
                     int ano_de_defesa= rs.getInt("ano_de_defesa");
                     String resumo= rs.getString("resumo");
-<<<<<<< Updated upstream
-
                     CadastroTCCsDTO tcc = new CadastroTCCsDTO(id, titulo, autor, orientador, ano_de_defesa, resumo);
                     TCCs.add(tcc); 
-
-=======
                     CadastroTCCsDTO tccs = new CadastroTCCsDTO(id, titulo, autor, orientador, ano_de_defesa, resumo);
                     TCCs.add(tccs);
->>>>>>> Stashed changes
                 }
             }
         } catch (SQLException e) {
@@ -80,7 +70,6 @@ public class CadastroTCCsDAO {
     // Método para atualizar um TCC
     public void atualizarTCCs(CadastroTCCsDTO TCCs) {
         try {
-<<<<<<< Updated upstream
             String query = "UPDATE cadastroTCCs SET titulo_tcc = ?, autor_tcc = ?, orientador_tcc = ?, ano_de_defesa = ?, resumo = ? WHERE id_TCC = ?";
             try (PreparedStatement ps = connection.prepareStatement(query)) {
                 ps.setString(1, TCCs.getTitulo_tcc());
@@ -90,18 +79,6 @@ public class CadastroTCCsDAO {
                 ps.setString(5, TCCs.getResumo());
                 ps.setInt(6, TCCs.getId_TCC());
                 ps.executeUpdate();
-=======
-            String query = "UPDATE cadastrotccs SET titulo_tcc = ?, autor_tcc = ?, orientador_tcc = ?, ano_de_defesa = ?, resumo = ? WHERE id_TCC = ?";
-            try (PreparedStatement pst = connection.prepareStatement(query)) {
-                pst.setString(1, TCCs.getTitulo_tcc());
-                pst.setString(2, TCCs.getAutor_tcc());
-                pst.setString(3, TCCs.getOrientador_tcc());
-                pst.setInt(4, TCCs.getAno_de_defesa());
-                pst.setString(5, TCCs.getResumo());
-                pst.executeUpdate();
->>>>>>> Stashed changes
-            }
-            
         } catch (SQLException e) {
             System.err.println("Erro ao atualizar tcc: " + e.getMessage());
         }
