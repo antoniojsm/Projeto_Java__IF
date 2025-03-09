@@ -28,7 +28,7 @@ public class CadastroTCCsDAO {
     public void cadastrarTCCs (CadastroTCCsDTO TCCs) {
        connection= ConexaoMySQL.getConnection();
        try {
-            String query = "INSERT INTO cadastroTCCs (titulo_tcc, autor_tcc, orientador_tcc, ano_de_defesa, resumo) VALUES (?, ?, ?)";
+            String query = "INSERT INTO cadastroTCCs (titulo_tcc, autor_tcc, orientador_tcc, ano_de_defesa, resumo) VALUES (?, ?, ?, ?, ?,?)";
             try (PreparedStatement pst = connection.prepareStatement(query)) {
                 pst.setString(1, TCCs.getTitulo_tcc());
                 pst.setString(2, TCCs.getAutor_tcc());
@@ -40,7 +40,7 @@ public class CadastroTCCsDAO {
        } catch (SQLException e) {
             System.err.println("Erro ao cadastrar tcc: " + e.getMessage());
         }
-       
+    }
        public List<CadastroTCCsDTO> listarTCCs() {
         List<CadastroTCCsDTO> TCCs = new ArrayList<>();
         try {
@@ -54,8 +54,9 @@ public class CadastroTCCsDAO {
                     String orientador= rs.getString("orientador_tcc");
                     int ano_de_defesa= rs.getInt("ano_de_defesa");
                     String resumo= rs.getString("resumo");
-                    CadastroTCCsDTO TCCs = new CadastroTCCsDTO(id, titulo, autor, orientador,ano_de_defesa, resumo);
-                    TCCs.add(TCCs);
+                    CadastroTCCsDTO tcc = new CadastroTCCsDTO(id, titulo, autor, orientador, ano_de_defesa, resumo);
+                    TCCs.add(tcc); 
+
                 }
             }
         } catch (SQLException e) {
@@ -64,16 +65,17 @@ public class CadastroTCCsDAO {
         return TCCs;
     }
 
-    // Método para atualizar um livro
-    public void atualizarTCCs(CadastroTCCsDTO lTCCs) {
+    // Método para atualizar um TCC
+    public void atualizarTCCs(CadastroTCCsDTO TCCs) {
         try {
             String query = "UPDATE cadastroTCCs SET titulo_tcc = ?, autor_tcc = ?, orientador_tcc = ?, ano_de_defesa = ?, resumo = ? WHERE id_TCC = ?";
             try (PreparedStatement ps = connection.prepareStatement(query)) {
-                pst.setString(1, TCCs.getTitulo_tcc());
-                pst.setString(2, TCCs.getAutor_tcc());
-                pst.setString(3, TCCs.getOrientador_tcc());
-                pst.setInt(4, TCCs.getAnoDeDefesa_tcc());
-                pst.setString(5, TCCs.getResumo());
+                ps.setString(1, TCCs.getTitulo_tcc());
+                ps.setString(2, TCCs.getAutor_tcc());
+                ps.setString(3, TCCs.getOrientador_tcc());
+                ps.setInt(4, TCCs.getAno_de_defesa());
+                ps.setString(5, TCCs.getResumo());
+                ps.setInt(6, TCCs.getId_TCC());
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
@@ -83,6 +85,7 @@ public class CadastroTCCsDAO {
     
      // Método para excluir um TCC
     public void excluirTCC(int id_TCC) {
+        connection = ConexaoMySQL.getConnection();
         try {
             String query = "DELETE FROM cadastroTCCs WHERE id_TCC = ?";
             try (PreparedStatement pst = connection.prepareStatement(query)) {
@@ -94,11 +97,4 @@ public class CadastroTCCsDAO {
         }
     }
 }
-       
-       
-       
-       
-       
-       
-       
-
+   

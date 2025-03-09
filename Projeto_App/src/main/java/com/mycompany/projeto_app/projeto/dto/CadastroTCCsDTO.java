@@ -27,7 +27,7 @@ package com.mycompany.projeto_app.projeto.dto;
         this.resumo = resumo;
         
     }
-    public void setId_tcc(int id_TCC) {
+    public void setId_TCC(int id_TCC) {
         this.id_TCC = id_TCC;
     }
 
