@@ -5,6 +5,7 @@
 package com.mycompany.projeto_app.projeto.dao;
 
 import com.mycompany.projeto_app.projeto.dto.CadastroAlunoDTO;
+import com.mycompany.projeto_app.projeto.dto.CadastroLivrosDTO;
 import com.mycompany.projeto_app.projeto.factory.ConexaoMySQL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -75,31 +76,30 @@ public class CadastroAlunoDAO {
     return alunos;
 }
     // Método para atualizar um livro
-   public void atualizarAluno(CadastroAlunoDTO aluno) {
-    try {
-        String query = "UPDATE cadastroalunos SET cpf = ?, nome_aluno = ?, email_aluno = ?, emprestimo = ?, entrega = ? WHERE id_aluno = ?";
-        try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, aluno.getCpf());
-            ps.setString(2, aluno.getNome_aluno());
-            ps.setString(3, aluno.getEmail_aluno());
-            ps.setString(4, aluno.getEmprestimo());
-            ps.setString(5, aluno.getEntrega());
-            ps.setInt(6, aluno.getId_aluno()); // Adicionado o ID para a cláusula WHERE
-            ps.executeUpdate();
-        }
-    } catch (SQLException e) {
-        System.err.println("Erro ao atualizar o cadastro do aluno: " + e.getMessage());
-    }
-}
-
-    // Método para excluir um aluno
-    public void excluirAluno(int id_aluno) {
+    public void atualizarAluno(CadastroAlunoDTO aluno) {
         try {
-            String query = "DELETE FROM cadastroalunos WHERE id_aluno = ?";
-            try (PreparedStatement pst = connection.prepareStatement(query)) {
-                pst.setInt(1, id_aluno);
-                pst.executeUpdate();
+            String query = "UPDATE cadastroalunos SET nome_aluno = ?, cpf = ?, email_aluno = ?, emprestimo = ?, entrega = ?  WHERE id_aluno = ?";
+            try (PreparedStatement ps = connection.prepareStatement(query)) {
+                ps.setString(1, aluno.getNome_aluno());
+                ps.setString(2, aluno.getCpf());
+                ps.setString(4, aluno.getEmail_aluno());
+                ps.setString(5, aluno.getEmprestimo());
+                ps.setString(6, aluno.getEntrega());
+                ps.setInt(7, aluno.getId_aluno());
+                ps.executeUpdate();
+                ps.close();
             }
+        } catch (SQLException e) {
+            System.err.println("Erro ao atualizar aluno: " + e.getMessage());
+        }
+    }
+    public void excluirAlunos(int id_aluno) {
+        try {
+            String query = "DELETE FROM cadastroalunos WHERE id_aluno = ?"; // Query SQL para excluir o aluno
+            try (PreparedStatement pst = connection.prepareStatement(query)) {
+                pst.setInt(1, id_aluno); // Define o ID do aluno como parâmetro
+                pst.executeUpdate(); // Executa a query
+            } // O PreparedStatement é fechado automaticamente ao final do bloco try
         } catch (SQLException e) {
             System.err.println("Erro ao excluir o cadastro do aluno: " + e.getMessage());
         }

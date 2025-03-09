@@ -21,6 +21,10 @@ public class CadastroLivrosDTO{
         this.disponibilidade = disponibilidade;
         
     }
+
+    public CadastroLivrosDTO() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     public void setId_livro(int id_livro) {
         this.id_livro = id_livro;
     }
@@ -52,4 +56,12 @@ public class CadastroLivrosDTO{
     public int getDisponibilidade() {
         return disponibilidade;
     }
-}
+    
+
+    @Override
+    public String toString() {
+        return this.getTitulo_livro();
+    }
+    
+    }
+    

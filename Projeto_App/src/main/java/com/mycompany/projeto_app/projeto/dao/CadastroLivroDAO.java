@@ -88,13 +88,10 @@ public class CadastroLivroDAO {
             try (PreparedStatement pst = connection.prepareStatement(query)) {
                 pst.setInt(1, id_livro);
                 pst.executeUpdate();
+                pst.close();
             }
         } catch (SQLException e) {
             System.err.println("Erro ao excluir livro: " + e.getMessage());
         }
     }
-
-    public void excluirAluno(int cpf) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-}
+   }
