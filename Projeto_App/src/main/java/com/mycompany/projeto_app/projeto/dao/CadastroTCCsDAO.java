@@ -27,8 +27,13 @@ public class CadastroTCCsDAO {
 
     public void cadastrarTCCs (CadastroTCCsDTO TCCs) {
        connection= ConexaoMySQL.getConnection();
+<<<<<<< Updated upstream
        try { 
             String query = "INSERT INTO cadastroTCCs (titulo_tcc, autor_tcc, orientador_tcc, ano_de_defesa, resumo) VALUES (?, ?, ?, ?, ?)";
+=======
+       try {
+            String query = "INSERT INTO cadastrotccs (titulo_tcc, autor_tcc, orientador_tcc, ano_de_defesa, resumo) VALUES (?, ?, ?, ?, ?)";
+>>>>>>> Stashed changes
             try (PreparedStatement pst = connection.prepareStatement(query)) {
                 pst.setString(1, TCCs.getTitulo_tcc());
                 pst.setString(2, TCCs.getAutor_tcc());
@@ -44,20 +49,25 @@ public class CadastroTCCsDAO {
        public List<CadastroTCCsDTO> listarTCCs() {
         List<CadastroTCCsDTO> TCCs = new ArrayList<>();
         try {
-            String query = "SELECT * FROM cadastroTCCs";
+            String query = "SELECT * FROM cadastrotccs";
             try (Statement st = connection.createStatement();
                  ResultSet rs = st.executeQuery(query)) {
                 while (rs.next()) {
                     int id = rs.getInt("id_TCC");
                     String titulo = rs.getString("titulo_tcc");
                     String autor = rs.getString("autor_tcc");
-                    String orientador= rs.getString("orientador_tcc");
+                    String orientador = rs.getString("orientador_tcc");
                     int ano_de_defesa= rs.getInt("ano_de_defesa");
                     String resumo= rs.getString("resumo");
+<<<<<<< Updated upstream
 
                     CadastroTCCsDTO tcc = new CadastroTCCsDTO(id, titulo, autor, orientador, ano_de_defesa, resumo);
                     TCCs.add(tcc); 
 
+=======
+                    CadastroTCCsDTO tccs = new CadastroTCCsDTO(id, titulo, autor, orientador, ano_de_defesa, resumo);
+                    TCCs.add(tccs);
+>>>>>>> Stashed changes
                 }
             }
         } catch (SQLException e) {
@@ -70,6 +80,7 @@ public class CadastroTCCsDAO {
     // Método para atualizar um TCC
     public void atualizarTCCs(CadastroTCCsDTO TCCs) {
         try {
+<<<<<<< Updated upstream
             String query = "UPDATE cadastroTCCs SET titulo_tcc = ?, autor_tcc = ?, orientador_tcc = ?, ano_de_defesa = ?, resumo = ? WHERE id_TCC = ?";
             try (PreparedStatement ps = connection.prepareStatement(query)) {
                 ps.setString(1, TCCs.getTitulo_tcc());
@@ -79,6 +90,16 @@ public class CadastroTCCsDAO {
                 ps.setString(5, TCCs.getResumo());
                 ps.setInt(6, TCCs.getId_TCC());
                 ps.executeUpdate();
+=======
+            String query = "UPDATE cadastrotccs SET titulo_tcc = ?, autor_tcc = ?, orientador_tcc = ?, ano_de_defesa = ?, resumo = ? WHERE id_TCC = ?";
+            try (PreparedStatement pst = connection.prepareStatement(query)) {
+                pst.setString(1, TCCs.getTitulo_tcc());
+                pst.setString(2, TCCs.getAutor_tcc());
+                pst.setString(3, TCCs.getOrientador_tcc());
+                pst.setInt(4, TCCs.getAno_de_defesa());
+                pst.setString(5, TCCs.getResumo());
+                pst.executeUpdate();
+>>>>>>> Stashed changes
             }
             
         } catch (SQLException e) {
@@ -90,7 +111,7 @@ public class CadastroTCCsDAO {
     public void excluirTCC(int id_TCC) {
         connection = ConexaoMySQL.getConnection();
         try {
-            String query = "DELETE FROM cadastroTCCs WHERE id_TCC = ?";
+            String query = "DELETE FROM cadastrotccs WHERE id_TCC = ?";
             try (PreparedStatement pst = connection.prepareStatement(query)) {
                 pst.setInt(1, id_TCC);
                 pst.executeUpdate();
