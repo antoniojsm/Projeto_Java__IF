@@ -181,7 +181,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jButton3.setText("Cadastrar Devolução");
 
-        jButton4.setText("Cadastra Emprestimo");
+        jButton4.setText("Cadastrar TCC");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -263,7 +263,8 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+    TelaTCCs TelaTcc = new TelaTCCs();
+    TelaTcc.setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**

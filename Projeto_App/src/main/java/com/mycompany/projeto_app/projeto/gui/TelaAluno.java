@@ -353,7 +353,7 @@ public class TelaAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-    excluirAluno();
+    excluirAlunos();
     listarAluno();
     limparCampos();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -475,20 +475,20 @@ public class TelaAluno extends javax.swing.JFrame {
 
          private void inserirAlunos() {
         String nome_aluno = txtNome.getText();
-        String cpfText = txtCpf.getText();
+        String cpf = txtCpf.getText();
         String email_aluno = txtEmail.getText();
         String emprestimo = txtEmprestimo.getText();
         String entrega = txtDevolucao.getText();
 
         // Validação dos campos
-        if (nome_aluno.isEmpty() || email_aluno.isEmpty() || cpfText.isEmpty() || emprestimo.isEmpty() || entrega.isEmpty()) {
+        if (nome_aluno.isEmpty() || email_aluno.isEmpty() || cpf.isEmpty() || emprestimo.isEmpty() || entrega.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Preencha todos os campos.", "Aviso", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         try {
             int id = (int) (Math.random() * 4);
-            CadastroAlunoDTO novoalunoDTO = new CadastroAlunoDTO(id, nome_aluno, cpfText, email_aluno, emprestimo, entrega);
+            CadastroAlunoDTO novoalunoDTO = new CadastroAlunoDTO(nome_aluno, cpf, email_aluno, emprestimo, entrega, id);
             CadastroAlunoDAO novoAluno = new CadastroAlunoDAO();
             // Chamada correta do método de cadastro;
             // Chamada correta do método de cadastro
@@ -546,15 +546,15 @@ public class TelaAluno extends javax.swing.JFrame {
     private void alterarAluno() {
         int selectedRow = tbDadoss.getSelectedRow();
         if (selectedRow != -1) {
-            int id_aluno = (int) tbDadoss.getValueAt(selectedRow, 0);
             String nome_aluno = txtNome.getText();
             String cpf = txtCpf.getText();
             String email_aluno = txtEmail.getText();
             String emprestimo = txtEmprestimo.getText();
             String entrega = txtDevolucao.getText();
+            int id_aluno = (int) tbDadoss.getValueAt(selectedRow, 5);
             try {
                 // Cria um novo objeto da classe ProdutoDTO 
-                CadastroAlunoDTO alunoAtualizado = new CadastroAlunoDTO(id_aluno, nome_aluno, cpf, email_aluno, emprestimo, entrega);
+                CadastroAlunoDTO alunoAtualizado = new CadastroAlunoDTO(nome_aluno, cpf, email_aluno, emprestimo, entrega, id_aluno);
                 // Inserir dados no banco através do método da Classe ProdutoDAO (adicionarProduto).  produtoDao.atualizarProduto(produtoAtualizado); 
                 CadastroAlunoDAO alunoDao = new CadastroAlunoDAO();
                 alunoDao.atualizarAluno(alunoAtualizado);
@@ -566,15 +566,15 @@ public class TelaAluno extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Selecione um  para atualizar.", "Aviso", JOptionPane.WARNING_MESSAGE);
         }
     }
-    private void excluirAluno() {
+    private void excluirAlunos() {
         int selectedRow = tbDadoss.getSelectedRow(); // Obtém a linha selecionada na tabela
         if (selectedRow != -1) { // Verifica se uma linha foi selecionada
-            int id_aluno = (int) tbDadoss.getValueAt(selectedRow, 0); // Obtém o ID do aluno da primeira coluna
-            int confirmacao = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir este aluno?", "Confirmação", JOptionPane.YES_NO_OPTION);
-
-            if (confirmacao == JOptionPane.YES_OPTION) { // Se o usuário confirmar
+            
+            int id_aluno = (int) tbDadoss.getValueAt(selectedRow, 5); // Obtém o ID do aluno da primeira coluna
+            int Confirmacao = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir este aluno?", "Confirmação", JOptionPane.YES_NO_OPTION);
+            if (Confirmacao == JOptionPane.YES_OPTION) { // Se o usuário confirmar
                 CadastroAlunoDAO alunoDao = new CadastroAlunoDAO();
-                alunoDao.excluirAlunos(id_aluno); // Chama o método para excluir o aluno do banco de dados
+                alunoDao.excluirAluno(id_aluno); // Chama o método para excluir o aluno do banco de dados
                 //atualizarTabela(); // Atualiza a tabela para refletir a exclusão
             }
         } else {

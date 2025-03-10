@@ -20,6 +20,13 @@ email_aluno VARCHAR (50) NOT NULL,
 emprestimo VARCHAR (15) NOT NULL,
 entrega VARCHAR (15) NOT NULL);
 
+CREATE TABLE cadastroTCCs (
+id_TCC INT PRIMARY KEY AUTO_INCREMENT,
+titulo_tcc VARCHAR(200) NOT NULL,
+autor_tcc VARCHAR(100) NOT NULL,
+orientador_tcc VARCHAR(100) NOT NULL,
+ano_de_defesa INT NOT NULL,
+resumo VARCHAR(600));
 
 INSERT INTO usuario VALUES 
 (NULL, 'admin', 12345)
