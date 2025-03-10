@@ -31,8 +31,8 @@ resumo VARCHAR(600));
 CREATE TABLE funcionarios (
 id_funcionario INT PRIMARY KEY AUTO_INCREMENT,
 nome_funcionario VARCHAR(100) NOT NULL,
-cargo VARCHAR(50) NOT NULL,
-email_funcionario VARCHAR (50));
+email_funcionario VARCHAR (50),
+cargo VARCHAR(50) NOT NULL);
 
 INSERT INTO usuario VALUES 
 (NULL, 'admin', 12345)

@@ -4,6 +4,8 @@
  */
 package com.mycompany.projeto_app.projeto.dto;
 
+import java.util.List;
+
 /**
  *
  * @author anton
@@ -23,6 +25,10 @@ public class CadastroLivrosDTO{
     }
 
     public CadastroLivrosDTO() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public CadastroLivrosDTO(int id, String nome, String email, String cargo) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     public void setId_livro(int id_livro) {
@@ -61,6 +67,10 @@ public class CadastroLivrosDTO{
     @Override
     public String toString() {
         return this.getTitulo_livro();
+    }
+
+    public void add(List<FuncionariosDTO> funcionarios) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     }

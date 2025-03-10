@@ -179,7 +179,12 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Cadastrar Devolução");
+        jButton3.setText("Cadastrar Funcionário");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Cadastrar TCC");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -267,6 +272,11 @@ public class TelaInicial extends javax.swing.JFrame {
     TelaTCCs TelaTcc = new TelaTCCs();
     TelaTcc.setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    TelaFuncionarios Telafuncionarios = new TelaFuncionarios();
+    Telafuncionarios.setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
