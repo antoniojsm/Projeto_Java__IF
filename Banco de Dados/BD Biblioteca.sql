@@ -28,5 +28,11 @@ orientador_tcc VARCHAR(100) NOT NULL,
 ano_de_defesa INT NOT NULL,
 resumo VARCHAR(600));
 
+CREATE TABLE funcionarios (
+id_funcionario INT PRIMARY KEY AUTO_INCREMENT,
+nome_funcionario VARCHAR(100) NOT NULL,
+cargo VARCHAR(50) NOT NULL,
+email_funcionario VARCHAR (50));
+
 INSERT INTO usuario VALUES 
 (NULL, 'admin', 12345)
